@@ -1,0 +1,3 @@
+A Pen created at CodePen.io. You can find this one at https://codepen.io/augs0/pen/QPyJXm.
+
+ Well, this was an interesting one! I've done something similar with HTML Canvas before, but I've never delved into p5.js. It took a lot of reading of both Florin's code and the API reference material to grasp every little bit. I've commented as usual to make sure I take away as much info as possible. I'm going to rewrite this by myself now and add a new twist!
