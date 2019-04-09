@@ -60,7 +60,7 @@ function drawData(data){
 	var drawY = data.pos[1] * windowHeight;
 	fill(socketColor);
 	ellipse(drawX, drawY, shapeWidth, shapeHeight);
-	fill("black");
+	fill(colour);
 }
 
 //Function to call there is data to send to the server, 

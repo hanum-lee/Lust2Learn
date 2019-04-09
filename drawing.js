@@ -32,8 +32,7 @@ app.get("/", function(req, res){
 io.on('connection', function (socket) {
 	// Send history to new client
 	for (var i in line_history) {
-		console.log(line_history[i]);
-		socket.broadcast.emit('news', line_history[i]);
+		socket.emit('news', line_history[i]);
 	}
  //console.log('a user connected');
 	socket.on('drawing', function (data) {
