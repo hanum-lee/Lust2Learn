@@ -54,7 +54,6 @@ socket.on('news', function (data) {
 //Function to call when data is received
 //Called inside .on()
 function drawData(data){
-	console.log(data);
 	var socketColor = color(data.fill[0], data.fill[1], data.fill[2]);
 	var drawX = data.pos[0] * windowWidth;
 	var drawY = data.pos[1] * windowHeight;
@@ -71,7 +70,6 @@ function grabAndSend(posX, posY, curFill){
 		pos: [posX, posY],
 		fill: rgba
 	};
-	console.log(data);
 	//Send the data to the server
 	socket.emit('drawing', data);
 }
