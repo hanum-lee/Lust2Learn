@@ -30,6 +30,7 @@ app.get("/", function(req, res){
 
 //Main Socket Connection
 io.on('connection', function (socket) {
+console.log("connected");
 	// Send history to new client
 	for (var i in line_history) {
 		socket.emit('news', line_history[i]);
@@ -42,4 +43,3 @@ io.on('connection', function (socket) {
 		//console.log(data);
   });
 });
-
