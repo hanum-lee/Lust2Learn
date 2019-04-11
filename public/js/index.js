@@ -1,8 +1,8 @@
-//Set some global vars
 var bgColor = 255;
 var randomColor;
-var shapeWidth = 20;
-var shapeHeight = 20;
+var shapeWidth;
+var shapeHeight;
+var colour;
 
 function getRandomColor(){
 	var r = random(50,240);
@@ -19,21 +19,23 @@ function setup(){
 
 function draw(){
 
-	var size = document.getElementById('brushSize').value;
-    
-	var colour = document.getElementById("brushColor").value;
-  
+	var size = parseInt(document.getElementById('brushSize').value);
+
+	colour = document.getElementById("brushColor").value;
 	if (mouseIsPressed) {
-	rect(mouseX, mouseY, size, size);
-	fill(colour);
-	noStroke();
+	strokeWeight(size);
+	line(mouseX, mouseY, pmouseX, pmouseY);
+	stroke(colour);
 
 	//Get position ratio
 		var adjustedX = mouseX/windowWidth;
 		var adjustedY = mouseY/windowHeight;
+		var adjustedpX = pmouseX/windowWidth;
+		var adjustedpY = pmouseY/windowHeight;
 
 		//Function that 'emits' data to the server
-		grabAndSend(adjustedX, adjustedY, randomColor);
+		grabAndSend(adjustedX, adjustedY, adjustedpX, adjustedpY, size, colour);
+		//console.log(colour);
 	}
 }
 
@@ -54,26 +56,34 @@ socket.on('news', function (data) {
 //Function to call when data is received
 //Called inside .on()
 function drawData(data){
-	console.log(data);
 	var socketColor = color(data.fill[0], data.fill[1], data.fill[2]);
 	var drawX = data.pos[0] * windowWidth;
 	var drawY = data.pos[1] * windowHeight;
-	fill(socketColor);
-	ellipse(drawX, drawY, shapeWidth, shapeHeight);
-	fill(colour);
+	var pdrawX = data.pPos[0] * windowWidth;
+	var pdrawY = data.pPos[1] * windowHeight;
+	var size = data.size;
+	strokeWeight(size);
+	stroke(socketColor);
+	line(drawX, drawY, pdrawX, pdrawY);
 }
 
 //Function to call there is data to send to the server, 
 //Uses .emit()
-function grabAndSend(posX, posY, curFill){
-	var rgba = curFill.levels;
+function grabAndSend(posX, posY, posPX, posPY, size, curFill){
+	var rgba = color(curFill).levels;
 	var data = {
 		pos: [posX, posY],
+		pPos: [posPX, posPY],
+		size: size,
 		fill: rgba
 	};
-	console.log(data);
+	//console.log(data);
 	//Send the data to the server
 	socket.emit('drawing', data);
+}
+
+function saveState(){
+	saveCanvas(canvas.jpeg);
 }
 
 //----------WINDOW RESIZE-----------//
