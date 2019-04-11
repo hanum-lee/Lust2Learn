@@ -77,7 +77,6 @@ function grabAndSend(posX, posY, posPX, posPY, size, curFill){
 		size: size,
 		fill: rgba
 	};
-	//console.log(data);
 	//Send the data to the server
 	socket.emit('drawing', data);
 }
