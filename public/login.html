@@ -2,8 +2,8 @@
 
 <head>
   <title>Express</title>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="/stylesheets/style.css">
+	<meta charset="utf-8">
+	<link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">  <link rel="stylesheet" href="/stylesheets/style.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -13,42 +13,37 @@
 <body>
 <img src="/img/ilLUSTrate_logo.png" id="logo">
 <div id="user-check">
-	<button type="button" class="btn btn-danger" id="userSignin">Continue as User</button>
-	<br>
-	<a role="button" class="btn btn-danger" id="guestSignin" href="/">Continue as Guest</a>
-	<br>
-	<p><a href="#" id="userSignup">New to the site? Sign up for an account!</a></p>
-</div>
-
-  <div id="login">
 	<form>
-	  <div class="form-group">
-		<label for="username">Username</label>
-		<input type="text" class="form-control" id="signinUsername" placeholder="Enter username">
-	  </div>
-	  <div class="form-group">
-		<label for="password">Password</label>
-		<input type="password" class="form-control" id="signinPassword" placeholder="Enter password">
-	  </div>
-	  <div class="form-check">
-		<input type="checkbox" class="form-check-input" id="cookieEnable">
-		<label class="form-check-label" for="exampleCheck1">Keep me signed in</label>
-	  </div>
-	  <br>
-	  <button type="submit" class="btn btn-danger">Login</button>
+		<div id='user-login'>
+			<input type="text" placeholder="Username"> <br>
+			<input type="password" placeholder="Password"> <br>
+			<div class="form-check">
+					<input style='width: 13px;' type="checkbox" id="cookieEnable">
+					<label class="form-check-label" for="exampleCheck1">Remember me</label>
+			</div>
+			<button type="button" class="btn btn-danger" id="userSignin">Sign In</button>
+		</div>
 	</form>
+	<br>
+	<a role="button" class="btn btn-danger" id="userSignup" href="#">Create an account!</a>
+	<br>
+	<p><a href="/" id="guestSignin">Continue as guest</a></p>
 </div>
 
 <div id="signup">
 	<form>
+		<div class="form-group">
+			<input type="email" class="form-control" id="userEmail" placeholder="Email">
+		</div>
 	  <div class="form-group">
-		<label for="username">Username</label>
 		<input type="text" class="form-control" id="signupUsername" placeholder="Enter username">
 	  </div>
 	  <div class="form-group">
-		<label for="password">Password</label>
 		<input type="password" class="form-control" id="signupPassword" placeholder="Enter password">
-	  </div>
+		</div>
+		<div class="form-group">
+				<input type="password" class="form-control" id="checkPassword" placeholder="Retype password">
+		</div>
 	  <br>
 	  <button type="submit" class="btn btn-danger">Sign Up</button>
 	</form>
@@ -56,11 +51,6 @@
 
 <script>
 	$(function() {
-		$("#userSignin").click(function(){
-			$("#user-check").hide();
-			$("#login").show();
-		});
-
 		$("#userSignup").click(function(){
 			$("#user-check").hide();
 			$("#signup").show();
