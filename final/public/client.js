@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
    // Function to change line colour
    socket.on('change_line_colour', function (data) {
-     colour =
+     colour = "black";
    });
 
    // draw line received from server
