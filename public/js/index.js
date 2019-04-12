@@ -56,6 +56,7 @@ socket.on('news', function (data) {
 //Function to call when data is received
 //Called inside .on()
 function drawData(data){
+	smooth()
 	var socketColor = color(data.fill[0], data.fill[1], data.fill[2]);
 	var drawX = data.pos[0] * windowWidth;
 	var drawY = data.pos[1] * windowHeight;
