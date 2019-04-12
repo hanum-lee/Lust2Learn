@@ -21,12 +21,26 @@ document.addEventListener("DOMContentLoaded", function() {
    canvas.onmousedown = function(e){ mouse.click = true; };
    canvas.onmouseup = function(e){ mouse.click = false; };
 
-   canvas.onmousemove = function(e) {
+   //fix the mouse position problem when resizing
+   canvas.onmousemove = function(canvas, evt) {
+      var rect = canvas.getBoundingClientRect();
+      var sx = canvas.scrollWidth / width;
+      var sy = canvas.scrollHeight / height;
+      
+      return {
+      x: (evt.clientX - rect.left) / sx,
+      y: (evt.clientY - rect.top) / sy,
+      winX: evt.clientX,
+      winY: evt.clientY
+      };
+      }
+   
+   /*function(e) {
       // normalize mouse position to range 0.0 - 1.0
       mouse.pos.x = e.clientX / width;
       mouse.pos.y = e.clientY / height;
       mouse.move = true;
-   };
+   };*/
 
    // Function to change line colour
    socket.on('change_line_colour', function (data) {
