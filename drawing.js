@@ -1,7 +1,7 @@
 //Set up requirements
 var express = require("express");
 var line_history = [];
-
+var bodyParser = require('body-parser');
 /*----------
 SERVER SETUP
 -----------*/
@@ -11,6 +11,9 @@ var app = express();
 app.set("views", __dirname + '/views');
 //Add connection to the public folder for css & js files
 app.use(express.static(__dirname + '/public'));
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 //Set a port value
 var port = 3000;
@@ -26,6 +29,16 @@ ROUTES
 //Main Page Route
 app.get("/", function(req, res){
 	res.render('index');
+});
+
+app.post('/login',function (req, res) {
+	console.log(req.body);
+	res.send('success!');
+});
+
+app.post('/createUser',function(req,res){
+	console.log(req.body);
+	res.send('success!');
 });
 
 //Main Socket Connection
