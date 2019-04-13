@@ -82,8 +82,14 @@ function grabAndSend(posX, posY, posPX, posPY, size, curFill){
 	socket.emit('drawing', data);
 }
 
+// Save canvas
 function saveState(){
 	saveCanvas(canvas.jpeg);
+}
+
+// Sharing canvas via link
+function shareState(){
+	
 }
 
 //----------WINDOW RESIZE-----------//
