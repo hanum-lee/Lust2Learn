@@ -3,17 +3,15 @@
     position: relative; 
 }
 #container{
-  width: 1000px;
-  height: 500px;
+  width: 1200px;
+  height: 600px;
   background-color: #fff;
   border-radius: 5px;
-}
-body{
-  background: #F7AF9D !important;
+  float: right;
 }
 
-#imageView { 
-    border: 1px solid #000; 
+body{
+  background: #F7AF9D !important;
 }
 
 #imageTemp { 
@@ -25,6 +23,7 @@ canvas {
   border-radius: 5px;
   cursor: crosshair;
 }
+
 #text_tool {
 position: absolute;
 border: 1px dashed black;
@@ -33,6 +32,10 @@ z-index:1000 !important;
 display: none;
 overflow: hidden;
 white-space: nowrap;
+}
+.container {
+  float: left;
+  width: 20px !important;
 }
 .container .btn.btn-sm{
 background: #06f;

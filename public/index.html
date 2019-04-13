@@ -15,28 +15,27 @@
 	<div class="container">
         <p>
         <input type="image" src='img/pencil.png' value="pencil" id="pencil-button">
+        <span class="form-group" style="width: 50px;display: inline-block;">
+            <select class="form-control" id="line-Width">
+              <option>2</option>
+              <option>4</option>
+              <option>6</option>
+              <option>8</option>
+              <option>10</option>
+              <option>12</option>
+              <option>14</option>
+            </select>
+          </span>
+        <input id="colour-picker" value="#000000" style="width:30px; height: 25px; font-size:0;" class="jscolor {width:30px, height:25px, position:'right', borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#666'}">
         <input type="image" src='img/rectangle.png' value="rect" id="rect-button">
         <input type="image" src='img/circle.png' value="circle" id="circle-button">
         <input type="image" src='img/ellipse.png' value="ellipse" id="ellipse-button">
         <input type="image" src='img/line.png' value="line" id="line-button">
         <input type="image" src='img/text.png' value="text" id="text-button">
         <input type="image" src='img/eraser.png' id="clear-all">
-        <label for="colour" style="position:absolute;">Colour : </label>
-        <input id="colour-picker" value="#000000" style="width:80px;" class="jscolor {width:243, height:150, position:'right',
-    borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#666'}">
-        <span class="form-group" style="width: 90px;display: inline-block;">
-          <label for="line-Width">Thickness: </label>
-          <select class="form-control" id="line-Width">
-            <option>2</option>
-            <option>4</option>
-            <option>6</option>
-            <option>8</option>
-            <option>10</option>
-            <option>12</option>
-            <option>14</option>
-          </select>
-        </span>
-         <span class="form-group" style="width: 130px;display: inline-block;">
+        
+
+         <span class="form-group" style="width: 50px;display: inline-block;">
           <label for="draw-text-font-family">Font: </label>
           <select class="form-control" id="draw-text-font-family">
             <option value="Arial">Arial</option>
@@ -47,28 +46,29 @@
             <option value="sans-serif">sans-serif</option>
           </select>
         </span>
-        <span class="form-group" style="width: 90px;display: inline-block;">
+        <span class="form-group" style="width: 50px;display: inline-block;">
           <label for="draw-text-font-size">Font Size: </label>
           <select class="form-control" id="draw-text-font-size">
-            <option value="16">16 Px</option>
-            <option value="18">18 Px</option>
-            <option value="20">20 Px</option>
-            <option value="22">22 Px</option>
-            <option value="24">24 Px</option>
-            <option value="26">26 Px</option>
-            <option value="28">28 Px</option>
-            <option value="30">30 Px</option>
-            <option value="32" selected>32 Px</option>
-            <option value="34">34 Px</option>
-            <option value="36">36 Px</option>
-            <option value="38">38 Px</option>
-            <option value="40">40 Px</option>
+            <option value="16">16 px</option>
+            <option value="18">18 px</option>
+            <option value="20">20 px</option>
+            <option value="22">22 px</option>
+            <option value="24">24 px</option>
+            <option value="26">26 px</option>
+            <option value="28">28 px</option>
+            <option value="30">30 px</option>
+            <option value="32" selected>32 px</option>
+            <option value="34">34 px</option>
+            <option value="36">36 px</option>
+            <option value="38">38 px</option>
+            <option value="40">40 px</option>
           </select>
         </span>
         </p>
+	  </div>
 
         <div id="container">
-          <canvas id="imageView" width="1000" height="500">
+          <canvas  id="imageView" width="1200" height="600">
             <p>Unfortunately, your browser is currently unsupported by our web
             application.  We are sorry for the inconvenience. Please use one of the
             supported browsers listed below, or draw the image you want using an
@@ -79,20 +79,19 @@
               href="http://www.konqueror.org">Konqueror</a>.</p>
           </canvas>
         </div>
-    </div>
     
 <!-- Script files -->
         <script src='jquery.min.js'></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="jscolor/jscolor.min.js"></script>
         <script src="/socket.io/socket.io.js"></script>
-		 <script src="canvas.js"></script> 
-     <script type="text/javascript">
-      $(document).ready(function(){
-          var board_url = window.location.href;
-          $('.linkToBoard').attr("href",board_url);
-      });
-    </script>
+		    <script src="canvas.js"></script> 
+        <script type="text/javascript">
+          $(document).ready(function(){
+              var board_url = window.location.href;
+              $('.linkToBoard').attr("href",board_url);
+          });
+        </script>
 
 	</body>
 </html>
