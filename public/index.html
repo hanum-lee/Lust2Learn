@@ -11,7 +11,9 @@
     
 	</head>
     
-	<body style="margin-top:30px;">
+  <body style="margin-top:5px;">
+    
+   <img style='width: 130px; display: block; margin: 0 auto;' src='img/ilLUSTrate_logo.png'> 
 	<div class="container">
         <p>
         <input type="image" src='img/pencil.png' value="pencil" id="pencil-button">
@@ -26,17 +28,17 @@
               <option>14</option>
             </select>
           </span>
-        <input id="colour-picker" value="#000000" style="width:30px; height: 25px; font-size:0;" class="jscolor {width:30px, height:25px, position:'right', borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#666'}">
+        <input id="colour-picker" value="#000000" style="width:30px; height: 25px; font-size:0; margin-bottom: 5px;" class="jscolor {width:30px, height:25px, position:'right', borderColor:'#FFF', insetColor:'#FFF', backgroundColor:'#666'}">
         <input type="image" src='img/rectangle.png' value="rect" id="rect-button">
         <input type="image" src='img/circle.png' value="circle" id="circle-button">
         <input type="image" src='img/ellipse.png' value="ellipse" id="ellipse-button">
         <input type="image" src='img/line.png' value="line" id="line-button">
         <input type="image" src='img/text.png' value="text" id="text-button">
         <input type="image" src='img/eraser.png' id="clear-all">
+        <input type="image" src='img/save.png' id='save'>
         
 
          <span class="form-group" style="width: 50px;display: inline-block;">
-          <label for="draw-text-font-family">Font: </label>
           <select class="form-control" id="draw-text-font-family">
             <option value="Arial">Arial</option>
             <option value="Verdana" selected>Verdana</option>
@@ -47,7 +49,6 @@
           </select>
         </span>
         <span class="form-group" style="width: 50px;display: inline-block;">
-          <label for="draw-text-font-size">Font Size: </label>
           <select class="form-control" id="draw-text-font-size">
             <option value="16">16 px</option>
             <option value="18">18 px</option>

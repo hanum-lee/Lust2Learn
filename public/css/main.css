@@ -1,4 +1,6 @@
-
+.form-group {
+  margin-bottom: 5px !important;
+}
 #container { 
     position: relative; 
 }
@@ -8,6 +10,7 @@
   background-color: #fff;
   border-radius: 5px;
   float: right;
+  margin-right: 5px;
 }
 
 body{
@@ -58,4 +61,5 @@ color: #fff;
 
 input {
     width: 30px;
+    padding: 3%;
 }
