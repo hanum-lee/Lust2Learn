@@ -11,7 +11,8 @@
     "body-parser": "^1.18.3",
     "express": "4.9.x",
     "mysql": "^2.16.0",
-    "socket.io": "latest"
+    "socket.io": "latest",
+    "uuid": "^3.3.2"
   },
   "scripts": {
     "start": "node index.js"

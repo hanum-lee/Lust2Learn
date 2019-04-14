@@ -16,15 +16,18 @@ function userLogin(){
     let req = $.post('/login',logininfo);
 
     req.then(function(data){
-		console.log(data);
 		if (data.length < 1){
 			$("#no-user-err").show();
+		}
+		else{
+			document.cookie = "username="+data[0].username;
+			document.cookie = "id="+data[0].id;
+			window.location.replace("/?id="+data[0].id);
 		}
     });
     req.fail(function () {
        console.log("failed");
     });
-    console.log(logininfo);
 }
 
 function createUser(){
@@ -35,12 +38,11 @@ function createUser(){
     };
     let req = $.post('/createUser',createUser);
     req.then(function(data){
-        console.log(data);
+        if(data === "Duplicate entry"){
+			$("#dup-user-err").show();
+		}
     });
     req.fail(function () {
         console.log("failed");
     });
-    console.log(createUser);
-
-
 }

@@ -4,6 +4,7 @@ const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const port = process.env.PORT || 3000;
+const uuidv4 = require('uuid/v4')
 var mysql = require('mysql');
 var bodyParser = require('body-parser');
 
@@ -21,10 +22,10 @@ app.get("/", function(req, res){
 
 app.post('/login',function (req, res) {
 	var con = mysql.createConnection({
-		host: "localhost",
-		user: "root",
-		password: "tablefordays471",
-		database: "mysql"
+		host: 'localhost',
+		user: 'root',
+		password: 'tablefordays471',
+		database: 'mysql'
 	});
 
 	con.connect(function(err) {
@@ -41,19 +42,74 @@ app.post('/login',function (req, res) {
 
 app.post('/createUser',function(req,res){
 	var con = mysql.createConnection({
-		host: "localhost",
-		user: "root",
-		password: "tablefordays471",
-		database: "mysql"
+		host: 'localhost',
+		user: 'root',
+		password: 'tablefordays471',
+		database: 'mysql'
 	});
 
 	con.connect(function(err) {
-		let sql = "INSERT INTO user_info (email, username, password) VALUES (?,?,?)";
+		let sql = "INSERT INTO user_info (id, email, username, password) VALUES (?,?,?,?)";
+		const uniqueID = uuidv4();
 		let email = req.body.userEmail;
 		let username = req.body.userID;
 		let password = req.body.userPassword;
-		con.query(sql, [email, username, password], function (err, result) {
-			if (err) throw err;
+		con.query(sql, [uniqueID, email, username, password], function (err, result) {
+			if (err){
+				if(err.code == 'ER_DUP_ENTRY' || err.errno == 1062){
+					res.send("Duplicate entry");
+				}
+			}
+			else res.send(result);
+		});
+	});
+});
+
+app.post('/updateUsername',function (req, res) {
+	var con = mysql.createConnection({
+		host: 'localhost',
+		user: 'root',
+		password: 'tablefordays471',
+		database: 'mysql'
+	});
+
+	con.connect(function(err) {
+		if (err) throw err;
+		let sql = "UPDATE user_info SET username = ? WHERE id = ? AND password = ?";
+		let newUsername = req.body.username;
+		let id = req.body.id;
+		let password = req.body.userPassword;
+		con.query(sql, [newUsername, id, password], function (err, result) {
+			if (err) {
+				if(err.code == 'ER_DUP_ENTRY' || err.errno == 1062){
+					res.send("Duplicate entry");
+				}
+			}
+			else res.send(result);
+		});
+	});
+});
+
+app.post('/updatePassword',function (req, res) {
+	var con = mysql.createConnection({
+		host: 'localhost',
+		user: 'root',
+		password: 'tablefordays471',
+		database: 'mysql'
+	});
+
+	con.connect(function(err) {
+		if (err) throw err;
+		let sql = "UPDATE user_info SET password = ? WHERE id = ? AND password = ?";
+		let oldPassword = req.body.oldPass;
+		let newPassword = req.body.newPass;
+		let id = req.body.id;
+		con.query(sql, [newPassword, id, oldPassword], function (err, result) {
+			if (err) {
+				if(err.code == 'ER_DUP_ENTRY' || err.errno == 1062){
+					res.send("Duplicate entry");
+				}
+			}
 			else res.send(result);
 		});
 	});
