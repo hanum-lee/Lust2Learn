@@ -1,17 +1,24 @@
-import { PassThrough } from "stream";
-
 $(document).ready(function () {
-    $('#create-lobby').click(function(){
+    $('#create').click(function(){
         createLobby();
     });
-    $('#join-lobby').click(function(){
+    $('#join').click(function(){
         joinLobby();
     });
 });
 
 function createLobby(){
     // Create random lobby id (may need to change if lobbyname is too long)
-    const uniqueID = uuidv4();
+    let uniqueID;
+    let req1 = $.get('/createID');
+    req1.then(function(data){
+        console.log(data);
+        uniqueID = data;
+    });
+    var bob = document.getElementById("lobbyID");
+    console.log(uniqueID);
+    bob.innerHTML(uniqueID);
+    //$("#lobbyID").innerText(uniqueID);
     let lobbyinfo ={
         lobbyID: uniqueID,
         lobbyPassword:$('#create-lobby-password').val()

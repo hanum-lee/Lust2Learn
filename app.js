@@ -67,6 +67,14 @@ app.post('/createUser',function(req,res){
 	});
 });
 
+// Generate lobby ID
+app.get('/createID', function(req, res) {
+	let ID = uuidv4();
+	console.log(ID);
+	res.send(ID);
+});
+
+
 // Create new lobby
 app.post('/createLobby', function(req, res) {
 	var con = mysql.createConnection({
