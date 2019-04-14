@@ -94,7 +94,27 @@ app.post('/createLobby', function(req, res) {
 	});
 
 // Join lobby
-// TODO: implement
+app.post('/joinLobby', function(req, res) {
+	var con = mysql.createConnection({
+		host: 'localhost',
+		user: 'root',
+		password: 'tablefordays471',
+		database: 'mysql'
+	});
+});
+
+	con.connect(function(err) {
+		if (err) throw err;
+		let sql = "SELECT * FROM lobbies WHERE Name = ? AND Password = ?";
+		let name = req.body.lobbyID;
+		let password = req.body.lobbyPassword;
+		con.query(sql, [name, password], function (err, result) {
+			if (err) {
+				res.send("Not exists");
+			}
+			else res.send(result);
+		});
+	});
 
 // Change username
 app.post('/updateUsername',function (req, res) {

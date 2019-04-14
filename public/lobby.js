@@ -5,7 +5,7 @@ $(document).ready(function () {
         createLobby();
     });
     $('#join-lobby').click(function(){
-        createUser();
+        joinLobby();
     });
 });
 
@@ -27,5 +27,17 @@ function createLobby(){
 }
 
 function joinLobby(){
-    pass;
+    let lobbyinfo ={
+        lobbyID:$('#join-lobby-name').val(),
+        lobbyPassword:$('#join-lobby-password').val()
+    };
+    let req = $.post('/joinLobby', lobbyinfo);
+    req.then(function(data){
+        if(data === "Not exists"){
+            $('#no-lobby-error').show();
+        }
+    });
+    req.fail(function() {
+        console.log("failed");
+    });
 }
