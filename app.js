@@ -20,6 +20,7 @@ app.get("/", function(req, res){
 	res.render('index');
 });
 
+// Account login
 app.post('/login',function (req, res) {
 	var con = mysql.createConnection({
 		host: 'localhost',
@@ -40,6 +41,7 @@ app.post('/login',function (req, res) {
 	});
 });
 
+// Creating new account
 app.post('/createUser',function(req,res){
 	var con = mysql.createConnection({
 		host: 'localhost',
@@ -65,6 +67,36 @@ app.post('/createUser',function(req,res){
 	});
 });
 
+// Create new lobby
+app.post('/createLobby', function(req, res) {
+	var con = mysql.createConnection({
+		host: 'localhost',
+		user: 'root',
+		password: 'tablefordays471',
+		database: 'mysql'
+	});
+});
+
+	con.connect(function(err) {
+		if (err) throw err;
+		let sql = "INSERT INTO lobbies (ID, Name, Password) VALUES (?,?,?)";
+		const uniqueID = uuidv4();
+		let name = req.body.lobbyID;
+		let password = req.body.lobbyPassword;
+		con.query(sql, [uniqueID, name, password], function (err, result) {
+			if (err) {
+					if(err.code == 'ER_DUP_ENTRY' || err.errno == 1062) {
+							res.send("Duplicate entry");
+					}
+			}
+			else res.send(result);
+		});
+	});
+
+// Join lobby
+// TODO: implement
+
+// Change username
 app.post('/updateUsername',function (req, res) {
 	var con = mysql.createConnection({
 		host: 'localhost',
@@ -90,6 +122,7 @@ app.post('/updateUsername',function (req, res) {
 	});
 });
 
+// Update password
 app.post('/updatePassword',function (req, res) {
 	var con = mysql.createConnection({
 		host: 'localhost',
