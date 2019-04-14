@@ -21,6 +21,13 @@ $(document).ready(function () {
 		$("#user").text("GUEST");
 	}
 
+
+	$("#logoutlobby").click(function(){
+		window.location.replace("/lobby.html");
+		document.cookie = "id=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+		document.cookie = "username=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+	});
+
 	$("#logout").click(function(){
 		window.location.replace("/login.html");
 		document.cookie = "id=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
