@@ -1,28 +1,33 @@
 $(document).ready(function () {
     $('#create').click(function(){
-        createLobby();
+        createID();
     });
-    $('#join').click(function(){
+    $('#create-lobby').click(function(){
+        createLobby();
+    })
+    $('#join-lobby').click(function(){
         joinLobby();
     });
 });
 
-function createLobby(){
+let uniqueID;
+
+function createID(){
     // Create random lobby id (may need to change if lobbyname is too long)
-    let uniqueID;
     let req1 = $.get('/createID');
     req1.then(function(data){
-        console.log(data);
         uniqueID = data;
+        $("#lobbyID").html(uniqueID);
     });
-    var bob = document.getElementById("lobbyID");
+}
+
+function createLobby(){
     console.log(uniqueID);
-    bob.innerHTML(uniqueID);
-    //$("#lobbyID").innerText(uniqueID);
     let lobbyinfo ={
         lobbyID: uniqueID,
         lobbyPassword:$('#create-lobby-password').val()
     };
+    console.log(lobbyinfo);
     let req = $.post('/createLobby', lobbyinfo);
     req.then(function(data){
         pass;
@@ -30,8 +35,8 @@ function createLobby(){
     req.fail(function() {
         console.log("failed");
     });
-
 }
+
 
 function joinLobby(){
     let lobbyinfo ={
