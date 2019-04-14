@@ -48,7 +48,8 @@
 		</div>
 		<span id="dup-user-err" style="color: #990D35; display: none;">Username already taken.</span>
 		<span id='password-err' style="margin-bottom: 1%; text-align: center; color: #990D35; display: none;">Make sure you're passwords are the same!</span>
-	  <button type="submit" id="userCreate" class="btn btn-danger">Sign Up</button>
+		<button type="submit" id="userCreate" class="btn btn-danger">Sign Up</button>
+		<button style='width: 100%; margin-top: 3%;' type="button" class='btn btn-danger' id='signinback'>Back</button>
 	</form>
 </div>
 
@@ -66,6 +67,13 @@
 		$("#userSignup").click(function(){
 			$("#user-check").hide();
 			$("#signup").show();
+		});
+	});
+
+	$(function() {
+		$("#signinback").click(function(){
+			$("#signup").hide();
+			$("#user-check").show();
 		});
 	});
 </script>
