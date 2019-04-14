@@ -10,9 +10,9 @@ $(document).ready(function () {
 		window.location.replace("/?id="+idCookie);
 	}
 
-	if((id === "" || id === null) && !idCookie){
+	/*if((id === "" || id === null) && !idCookie){
 		window.location.replace("/login.html");
-	}
+	}*/
 
 	if(userCookie && userCookie !== ""){
 		$("#user").text(userCookie);
