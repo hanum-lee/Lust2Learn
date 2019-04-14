@@ -8,7 +8,9 @@
     "whiteboard"
   ],
   "dependencies": {
+    "body-parser": "^1.18.3",
     "express": "4.9.x",
+    "mysql": "^2.16.0",
     "socket.io": "latest"
   },
   "scripts": {

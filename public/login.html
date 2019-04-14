@@ -15,12 +15,13 @@
 <div id="user-check">
 	<form>
 		<div id='user-login'>
-			<input type="text" placeholder="Username"> <br>
-			<input type="password" placeholder="Password"> <br>
+			<input id="loginUsername" type="text" placeholder="Username"> <br>
+			<input id="loginPassword" type="password" placeholder="Password"> <br>
 			<div class="form-check">
 					<input style='width: 13px;' type="checkbox" id="cookieEnable">
 					<label class="form-check-label" for="exampleCheck1">Remember me</label>
 			</div>
+			<span id="no-user-err" style="color: red; display: none;">No matching username and password found.</span>
 			<button type="button" class="btn btn-danger" id="userSignin">Sign In</button>
 		</div>
 	</form>
@@ -45,7 +46,7 @@
 				<input type="password" class="form-control" id="checkPassword" placeholder="Retype password">
 		</div>
 	  <br>
-	  <button type="submit" class="btn btn-danger">Sign Up</button>
+	  <button type="submit" id="userCreate" class="btn btn-danger">Sign Up</button>
 	</form>
 </div>
 
@@ -57,6 +58,7 @@
 		});
 	});
 </script>
+<script src="login.js"></script>
 
 </body>
 
