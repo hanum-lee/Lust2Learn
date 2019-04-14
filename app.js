@@ -4,7 +4,7 @@ const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const port = process.env.PORT || 3000;
-const uuidv4 = require('uuid/v4')
+const uuidv4 = require('uuid/v4');
 var mysql = require('mysql');
 var bodyParser = require('body-parser');
 
@@ -115,44 +115,68 @@ app.post('/updatePassword',function (req, res) {
 	});
 });
 
+app.post('/getCanvas',function (req, res) {
+	var con = mysql.createConnection({
+		host: 'localhost',
+		user: 'root',
+		password: 'tablefordays471',
+		database: 'mysql'
+	});
+
+	con.connect(function(err) {
+		if (err) throw err;
+		let sql = "SELECT * FROM canvas_list WHERE id = ?";
+		let id = req.body.id;
+		con.query(sql, id, function (err, result) {
+			if (err) throw err;
+			else res.send(result);
+		});
+	});
+});
+
 function onConnection(socket){
+
+	socket.on('handshake', function(id){
+		socket.room = id;
+		socket.join(socket.room);
+	});
+
   socket.on('drawing', function(data){
-    socket.broadcast.emit('drawing', data);
-    //console.log(data);
+    socket.in(socket.room).emit('drawing', data);
   });
   
   socket.on('rectangle', function(data){
-    socket.broadcast.emit('rectangle', data);
+    socket.in(socket.room).emit('rectangle', data);
     //console.log(data);
   });
   
   socket.on('linedraw', function(data){
-    socket.broadcast.emit('linedraw', data);
+    socket.in(socket.room).emit('linedraw', data);
     //console.log(data);
   });
   
    socket.on('circledraw', function(data){
-    socket.broadcast.emit('circledraw', data);
+    socket.in(socket.room).emit('circledraw', data);
     //console.log(data);
   });
   
   socket.on('ellipsedraw', function(data){
-    socket.broadcast.emit('ellipsedraw', data);
+    socket.in(socket.room).emit('ellipsedraw', data);
     //console.log(data);
   });
   
   socket.on('textdraw', function(data){
-    socket.broadcast.emit('textdraw', data);
+    socket.in(socket.room).emit('textdraw', data);
     //console.log(data);
   });
   
   socket.on('copyCanvas', function(data){
-    socket.broadcast.emit('copyCanvas', data);
+    socket.in(socket.room).emit('copyCanvas', data);
     //console.log(data);
   });
   
   socket.on('Clearboard', function(data){
-    socket.broadcast.emit('Clearboard', data);
+    socket.in(socket.room).emit('Clearboard', data);
     //console.log(data);
   });
  

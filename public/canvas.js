@@ -1,5 +1,6 @@
 'use strict';
 
+
 (function() {
 
   var socket = io();
@@ -10,6 +11,16 @@
   var lineWidthPicked;
   var SelectedFontFamily;
   var SelectedFontSize;
+
+  var id;
+
+  var url_string = window.location.href;
+	var url = new URL(url_string);
+	id = url.searchParams.get("id");
+
+if(id !== null && id !== ""){
+	socket.emit('handshake', id);
+  }
   
   
 // Keep everything in anonymous function, called on window load.
@@ -295,6 +306,7 @@ window.addEventListener('load', function () {
         var w = canvaso.width;
         var h = canvaso.height;
         drawPencil(data.x0 * w, data.y0 * h, data.x1 * w, data.y1 * h, data.color, data.lineThickness);
+		console.log("test");
     }
     
     socket.on('drawing', onDrawingEvent);

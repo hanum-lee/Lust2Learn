@@ -6,13 +6,13 @@ $(document).ready(function () {
 	var idCookie = getCookie("id");
 	var userCookie = getCookie("username");
 
-	if(idCookie && idCookie !== "" && (!id || id === "")){
-		window.location.replace("/?id="+idCookie);
-	}
+	if(idCookie && idCookie !== ""){
 
-	if((id === "" || id === null) && !idCookie){
-		window.location.replace("/login.html");
+		if(!id || id === ""){
+			window.location.replace("/?id="+idCookie);
+		}
 	}
+	getCanvas(id);
 
 	if(userCookie && userCookie !== ""){
 		$("#user").text(userCookie);
@@ -34,6 +34,30 @@ $(document).ready(function () {
         passwordChange();
     });
 });
+
+function getCanvas(id){
+	let msg = {id: id};
+	let req = $.post('/getCanvas',msg);
+
+	req.then(function(data){
+
+		if(!data[0].path || data[0].path === ""){
+			$("#clear-all").click();
+		}
+		else{
+			var img = new Image();
+			img.onload = function() {
+				var ctx = document.getElementById('imageView').getContext('2d');
+				ctx.drawImage(img, 0, 0);
+			}
+			img.src = "."+data[0].path;
+		}
+
+	});
+    req.fail(function () {
+       console.log("failed");
+    });
+}
 
 function usernameChange(){
     let userinfo ={

@@ -6,6 +6,21 @@
   var canvas = document.getElementsByClassName('whiteboard')[0];
   var colors = document.getElementsByClassName('color');
   var context = canvas.getContext('2d');
+  var id;
+
+  var url_string = window.location.href;
+	var url = new URL(url_string);
+	id = url.searchParams.get("id");
+
+	var idCookie = getCookie("id");
+	var userCookie = getCookie("username");
+
+	if(idCookie && idCookie !== ""){
+
+		if(!id || id === ""){
+			window.location.replace("/?id="+idCookie);
+		}
+	}
 
   var current = {
     color: 'black'
@@ -21,7 +36,7 @@
     colors[i].addEventListener('click', onColorUpdate, false);
   }
 
-  socket.on('drawing', onDrawingEvent);
+	socket.emit('handshake', id);
 
   window.addEventListener('resize', onResize, false);
   onResize();
