@@ -10,16 +10,15 @@ $(document).ready(function () {
 });
 
 function createLobby(){
-
+    // Create random lobby id (may need to change if lobbyname is too long)
+    const uniqueID = uuidv4();
     let lobbyinfo ={
-        lobbyID:$('#create-lobby-name').val(),
+        lobbyID: uniqueID,
         lobbyPassword:$('#create-lobby-password').val()
     };
     let req = $.post('/createLobby', lobbyinfo);
     req.then(function(data){
-        if(data === "Duplicate entry"){
-            $("#dup-lobby-err").show();
-        }
+        pass;
     });
     req.fail(function() {
         console.log("failed");
@@ -28,10 +27,8 @@ function createLobby(){
 }
 
 function joinLobby(){
-    // Create random lobby id (may need to change if lobbyname is too long)
-    const uniqueID = uuidv4();
     let lobbyinfo ={
-        lobbyID: uniqueID,
+        lobbyID:$('#join-lobby-name').val(),
         lobbyPassword:$('#join-lobby-password').val()
     };
     let req = $.post('/joinLobby', lobbyinfo);

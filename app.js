@@ -79,7 +79,7 @@ app.post('/createLobby', function(req, res) {
 
 	con.connect(function(err) {
 		if (err) throw err;
-		let sql = "INSERT INTO lobbies (Name, Password) VALUES (?,?,?)";
+		let sql = "INSERT INTO lobbies (Name, Password) VALUES (?,?)";
 		let name = req.body.lobbyID;
 		let password = req.body.lobbyPassword;
 		con.query(sql, [name, password], function (err, result) {
