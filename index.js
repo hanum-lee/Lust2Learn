@@ -3,9 +3,21 @@ const express = require('express');
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
+const uuidv4 = require('uuid/v4');
+var bodyParser = require('body-parser');
 const port = process.env.PORT || 3000;
 
 app.use(express.static(__dirname + '/public'));
+
+// Generate lobby ID
+app.get('/createID', function(req, res) {
+	let ID = uuidv4();
+	res.send(ID);
+});
+
+app.post('/createLobby',function(req,res){
+  console.log('create',req.body);
+});
 
 function onConnection(socket){
   socket.on('drawing', function(data){
