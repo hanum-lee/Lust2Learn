@@ -83,11 +83,10 @@ app.post('/createLobby', function(req, res) {
 		password: 'tablefordays471',
 		database: 'mysql'
 	});
-});
 
 	con.connect(function(err) {
 		if (err) throw err;
-		let sql = "INSERT INTO lobbies (Name, Password) VALUES (?,?)";
+		let sql = "INSERT INTO lobbies (id, Password) VALUES (?,?)";
 		let name = req.body.lobbyID;
 		let password = req.body.lobbyPassword;
 		con.query(sql, [name, password], function (err, result) {
@@ -99,6 +98,7 @@ app.post('/createLobby', function(req, res) {
 			else res.send(result);
 		});
 	});
+});
 
 // Join lobby
 app.post('/joinLobby', function(req, res) {
@@ -108,20 +108,20 @@ app.post('/joinLobby', function(req, res) {
 		password: 'tablefordays471',
 		database: 'mysql'
 	});
-});
 
 	con.connect(function(err) {
 		if (err) throw err;
-		let sql = "SELECT * FROM lobbies WHERE Name = ? AND Password = ?";
+		let sql = "SELECT * FROM lobbies WHERE id = ? AND Password = ?";
 		let name = req.body.lobbyID;
 		let password = req.body.lobbyPassword;
 		con.query(sql, [name, password], function (err, result) {
 			if (err) {
-				res.send("Not exists");
+				throw err;
 			}
-			else res.send(result);
+			res.send(result);
 		});
 	});
+});
 
 // Change username
 app.post('/updateUsername',function (req, res) {

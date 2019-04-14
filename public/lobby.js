@@ -22,15 +22,14 @@ function createID(){
 }
 
 function createLobby(){
-    console.log(uniqueID);
     let lobbyinfo ={
         lobbyID: uniqueID,
         lobbyPassword:$('#create-lobby-password').val()
     };
-    console.log(lobbyinfo);
+
     let req = $.post('/createLobby', lobbyinfo);
     req.then(function(data){
-        pass;
+        window.location.replace("/?id="+uniqueID);
     });
     req.fail(function() {
         console.log("failed");
@@ -45,9 +44,12 @@ function joinLobby(){
     };
     let req = $.post('/joinLobby', lobbyinfo);
     req.then(function(data){
-        if(data === "Not exists"){
-            $('#no-lobby-error').show();
+        if(data.length < 1){
+            $('#no-lobby-err').show();
         }
+		else{
+			window.location.replace("/?id="+data[0].id);
+		}
     });
     req.fail(function() {
         console.log("failed");
