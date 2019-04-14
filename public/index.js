@@ -1,7 +1,6 @@
 $(document).ready(function () {
-    var url_string = window.location.href;
-	var url = new URL(url_string);
-	var id = url.searchParams.get("id");
+
+	var id = getID();
 
 	var idCookie = getCookie("id");
 	var userCookie = getCookie("username");
@@ -11,7 +10,14 @@ $(document).ready(function () {
 		if(!id || id === ""){
 			window.location.replace("/?id="+idCookie);
 		}
+
 	}
+	else{
+		$("#save").hide();
+		$("#logout").hide();
+		$("#sidemenuBtn").css('visibility','hidden');
+	}
+
 	getCanvas(id);
 
 	if(userCookie && userCookie !== ""){
@@ -20,6 +26,14 @@ $(document).ready(function () {
 	else{
 		$("#user").text("GUEST");
 	}
+
+	$("#getRoomID").click(function(){
+		displayRoomID(id);
+	});
+
+	$("#save").click(function(){
+		saveCanvas();
+	});
 
 	$("#logout").click(function(){
 		window.location.replace("/login.html");
@@ -34,6 +48,31 @@ $(document).ready(function () {
         passwordChange();
     });
 });
+
+function getID(){
+    var url_string = window.location.href;
+	var url = new URL(url_string);
+	var id = url.searchParams.get("id");
+	return id;
+}
+
+function displayRoomID(id){
+	$("#roomID").val(id);
+}
+
+function saveCanvas(){
+	var canvas = document.getElementById('imageView');
+    var context = canvas.getContext('2d');
+
+    var dataURL = canvas.toDataURL("image/jpeg");
+
+	var a = document.createElement('a');
+    a.href = dataURL;
+    a.download = getID()+".jpg";
+    document.body.appendChild(a);
+    a.click();
+
+}
 
 function getCanvas(id){
 	let msg = {id: id};

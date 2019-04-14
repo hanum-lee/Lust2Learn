@@ -5,6 +5,10 @@ $(document).ready(function () {
     $('#userCreate').click(function(){
         createUser();
     });
+	$('#guestSignin').click(function(){
+        document.cookie = "id=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+		document.cookie = "username=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    });
 });
 
 
@@ -22,7 +26,7 @@ function userLogin(){
 		else{
 			document.cookie = "username="+data[0].username;
 			document.cookie = "id="+data[0].id;
-			window.location.replace("/?id="+data[0].id);
+			window.location.replace("/lobby.html");
 		}
     });
     req.fail(function () {

@@ -41,7 +41,7 @@
     </aside>
 
     <div id='contentWrap'>
-      <label class='menuBtn floatr' for='sideToggle2'>&minus;</label>
+      <label class='menuBtn floatr' for='sideToggle2' id="sidemenuBtn">&minus;</label>
   <div id='banner'>
     <img style='width: 130px; margin-left: 1%;' src='img/ilLUSTrate_logo.png'> 
 
@@ -95,6 +95,7 @@
             </select>
           </span>
         <input type="image" src='img/eraser.png' id="clear-all">
+		<input type="image" src="img/paint.png" id="getRoomID" data-toggle="modal" data-target="#displayID">
         <input type="image" src='img/save.png' id='save'>
         <input type="image" src='img/logout.png' id='logout'>
       
@@ -114,6 +115,30 @@
         </div>
 
         </div>
+
+		<div id="displayID" class="modal fade" role="dialog">
+		  <div class="modal-dialog">
+
+			<div class="modal-content">
+			  <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Here is your room code!</h4>
+			  </div>
+			  <div class="modal-body">
+				<form>
+				  <div class="input-group" style="width:100%">
+					<input id="roomID" type="text" class="form-control"
+						value="" placeholder="Room Code">
+				  </div>
+				</form>
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			  </div>
+			</div>
+
+		  </div>
+		</div>
     
 <!-- Script files -->
         <script src='jquery.min.js'></script>
