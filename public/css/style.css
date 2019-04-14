@@ -1,6 +1,7 @@
 body {
   padding: 50px;
-  font: 14px  'Abel', sans-serif;
+	font: 14px  'Abel', sans-serif;
+	background: #FFF8E8;
 }
 
 form {

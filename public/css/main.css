@@ -4,6 +4,13 @@
 #container { 
     position: relative; 
 }
+
+#banner {
+  display: block;
+  margin: 0 auto;
+  width: 95%;
+}
+
 #container{
   width: 1200px;
   height: 690px;
@@ -15,6 +22,7 @@
 
 body{
   background: #990D35 !important;
+  font: 'Abel', sans-serif !important;
 }
 
 #imageTemp { 

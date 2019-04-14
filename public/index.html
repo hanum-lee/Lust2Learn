@@ -3,17 +3,48 @@
 	<head>
 		<meta charset="utf-8">
 		<title>ilLUSTrate</title>
-        <meta charset="utf-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">  <link rel="stylesheet" href="/stylesheets/style.css">
     <link rel='stylesheet' href="/css/main.css">
-    <!-- Bootstrap -->
+    <link rel='stylesheet' href="/css/sidebar.css">
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     
 	</head>
     
-  <body style="margin-top:5px;">
-    
-   <img style='width: 130px; display: block; margin: 0 auto;' src='img/ilLUSTrate_logo.png'> 
+  <body>
+    <input type='checkbox' id='sideToggle2' hidden>
+    <aside class='sideMenu right'>
+      <h2 id='user'>GUEST</h2>
+      <ul>
+        <form id='username-change'>
+          <label>Change your username</label>
+          <li>
+            <input class='form-control' type="text" placeholder="New username">
+            <input class='form-control' type="password" placeholder="Your password">
+            <button style="width: 100%; margin-bottom: 5%;" type="button" class="btn btn-danger" id="change-username">Submit</button>
+          </li>
+        </form>
+        <form id='password-change'>
+          <label>Change your password</label>
+          <li>
+              <input class='form-control' type="text" placeholder="Current password">
+              <input class='form-control' type="password" placeholder="New password">
+              <input class='form-control' type="password" placeholder="Retype new password">
+              <button style="width: 100%;" type="button" class="btn btn-danger" id="change-password">Submit</button>
+          </li>
+        </form>
+      </ul>
+    </aside>
+
+    <div id='contentWrap'>
+      <label class='menuBtn floatr' for='sideToggle2'>&minus;</label>
+  <div id='banner'>
+    <img style='width: 130px; margin-left: 1%;' src='img/ilLUSTrate_logo.png'> 
+
+  </div>
+
 	<div class="container">
       
         <input type="image" src='img/pencil.png' value="pencil" id="pencil-button">
@@ -79,6 +110,8 @@
               href="http://www.konqueror.org">Konqueror</a>.</p>
           </canvas>
         </div>
+
+        </div>
     
 <!-- Script files -->
         <script src='jquery.min.js'></script>
@@ -90,6 +123,13 @@
           $(document).ready(function(){
               var board_url = window.location.href;
               $('.linkToBoard').attr("href",board_url);
+          });
+
+          $(function() {
+            $("#userSignup").click(function(){
+              $("#user-check").hide();
+              $("#signup").show();
+            });
           });
         </script>
 
