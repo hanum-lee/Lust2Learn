@@ -1,0 +1,26 @@
+body {
+    font-family: 'Abel', sans-serif;
+    background: #FFF8E8;
+}
+
+button {
+    margin: 0 auto;
+    width: 45%;
+    margin-left: 3%;
+    height: 150px;
+}
+
+input {
+    margin-bottom: 3%;
+}
+
+.container {
+    display: block;
+    margin: 0 auto;
+    margin-top: 20%;
+}
+
+#createlobby, #joinlobby {
+    display: block;
+    margin: 0 auto;
+}
