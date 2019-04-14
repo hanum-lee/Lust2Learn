@@ -24,14 +24,14 @@
             <p>Share this with friends!</p>
             <!-- <input class='form-control' type="text" id="create-lobby-name" placeholder="Lobby Name">-->
             <input class='form-control' type="password" id="create-lobby-password" placeholder="Lobby password">
-           <!-- <span id="dup-lobby-err" style="color: red; display: none;">Username already taken.</span>-->
             <button style="width: 100%; margin-bottom: 5%; height:auto; margin-left: 0;" type="button" class="btn btn-danger" id="create-lobby">Create Lobby!!</button>
             <button class='btn btn-danger' id='createback'>Go back</button>
         </div>
 
         <div id='joinlobby'  style='display: none; width: 40%;'>
-            <input class='form-control' type="text" placeholder="Lobby ID">
-            <input class='form-control' type="password" placeholder="Lobby password">
+            <input class='form-control' type="text" id="join-lobby-name" placeholder="Lobby Name">
+            <input class='form-control' type="password" id="join-lobby-password" placeholder="Lobby password">
+            <span id="no-lobby-err" style="color: red; display: none;">Lobby doesn't exist.</span>
             <button style="width: 100%; margin-bottom: 5%; height:auto; margin-left: 0;" type="button" class="btn btn-danger" id="join-lobby">Join Lobby!!</button>
             <button class='btn btn-danger' id='joinback'>Go back</button>
         </div>

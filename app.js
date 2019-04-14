@@ -79,11 +79,10 @@ app.post('/createLobby', function(req, res) {
 
 	con.connect(function(err) {
 		if (err) throw err;
-		let sql = "INSERT INTO lobbies (ID, Name, Password) VALUES (?,?,?)";
-		const uniqueID = uuidv4();
+		let sql = "INSERT INTO lobbies (Name, Password) VALUES (?,?)";
 		let name = req.body.lobbyID;
 		let password = req.body.lobbyPassword;
-		con.query(sql, [uniqueID, name, password], function (err, result) {
+		con.query(sql, [name, password], function (err, result) {
 			if (err) {
 					if(err.code == 'ER_DUP_ENTRY' || err.errno == 1062) {
 							res.send("Duplicate entry");
@@ -94,7 +93,27 @@ app.post('/createLobby', function(req, res) {
 	});
 
 // Join lobby
-// TODO: implement
+app.post('/joinLobby', function(req, res) {
+	var con = mysql.createConnection({
+		host: 'localhost',
+		user: 'root',
+		password: 'tablefordays471',
+		database: 'mysql'
+	});
+});
+
+	con.connect(function(err) {
+		if (err) throw err;
+		let sql = "SELECT * FROM lobbies WHERE Name = ? AND Password = ?";
+		let name = req.body.lobbyID;
+		let password = req.body.lobbyPassword;
+		con.query(sql, [name, password], function (err, result) {
+			if (err) {
+				res.send("Not exists");
+			}
+			else res.send(result);
+		});
+	});
 
 // Change username
 app.post('/updateUsername',function (req, res) {
