@@ -20,9 +20,14 @@
   margin-right: 5px;
 }
 
+h2 {
+  display: inline;
+  color: white !important;
+}
+
 body{
   background: #990D35 !important;
-  font: 'Abel', sans-serif !important;
+  font-family: 'Abel', sans-serif !important;
 }
 
 #imageTemp { 
