@@ -79,11 +79,10 @@ app.post('/createLobby', function(req, res) {
 
 	con.connect(function(err) {
 		if (err) throw err;
-		let sql = "INSERT INTO lobbies (ID, Name, Password) VALUES (?,?,?)";
-		const uniqueID = uuidv4();
+		let sql = "INSERT INTO lobbies (Name, Password) VALUES (?,?,?)";
 		let name = req.body.lobbyID;
 		let password = req.body.lobbyPassword;
-		con.query(sql, [uniqueID, name, password], function (err, result) {
+		con.query(sql, [name, password], function (err, result) {
 			if (err) {
 					if(err.code == 'ER_DUP_ENTRY' || err.errno == 1062) {
 							res.send("Duplicate entry");

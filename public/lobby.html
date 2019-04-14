@@ -12,15 +12,20 @@
 
     <body>
         <div class="container">
+            <h1>Welcome to IlLUSTrate, create or join a lobby to start the fun ;)</h1>
             <button type="button" class="btn btn-danger" id='create'>Create a new lobby</button>
             <button type="button" class="btn btn-danger" id='join'>Enter existing lobby</button>
+            <button type="button" class='btn btn-danger' onclick="window.location.href='login.html'" id='lobbyback'>Go to login</button>
         </div>  
 
         <div id='createlobby' style='display: none; width: 40%;'>
-            <input class='form-control' type="text" id="create-lobby-name" placeholder="Lobby Name">
+            <p>your lobby id is:</p>
+            <h3 id='lobbyID'>filler</h3>
+            <p>Share this with friends!</p>
+            <!-- <input class='form-control' type="text" id="create-lobby-name" placeholder="Lobby Name">-->
             <input class='form-control' type="password" id="create-lobby-password" placeholder="Lobby password">
-            <span id="dup-lobby-err" style="color: red; display: none;">Lobby already exists.</span>
             <button style="width: 100%; margin-bottom: 5%; height:auto; margin-left: 0;" type="button" class="btn btn-danger" id="create-lobby">Create Lobby!!</button>
+            <button class='btn btn-danger' id='createback'>Go back</button>
         </div>
 
         <div id='joinlobby'  style='display: none; width: 40%;'>
@@ -28,15 +33,17 @@
             <input class='form-control' type="password" id="join-lobby-password" placeholder="Lobby password">
             <span id="no-lobby-err" style="color: red; display: none;">Lobby doesn't exist.</span>
             <button style="width: 100%; margin-bottom: 5%; height:auto; margin-left: 0;" type="button" class="btn btn-danger" id="join-lobby">Join Lobby!!</button>
+            <button class='btn btn-danger' id='joinback'>Go back</button>
         </div>
     </body>
 
     <script>
-        $(function() {
+$(function() {
             $("#create").click(function(){
                 $("#join").hide();
                 $("#create").hide();
                 $("#createlobby").show();
+                $("#lobbyback").hide();
             });
         });
 
@@ -45,8 +52,31 @@
                 $("#join").hide();
                 $("#create").hide();
                 $("#joinlobby").show();
+                $("#lobbyback").hide();
             });
         });
+
+        $(function() {
+            $("#createback").click(function(){
+                $("#join").show();
+                $("#create").show();
+                $("#joinlobby").hide();
+                $("#createlobby").hide();
+                $("#lobbyback").show();
+            });
+        });
+
+        $(function() {
+            $("#joinback").click(function(){
+                $("#join").show();
+                $("#create").show();
+                $("#joinlobby").hide();
+                $("#createlobby").hide();
+                $("#lobbyback").show();
+            });
+        });
+
+
     </script>
 
 </html>

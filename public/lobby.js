@@ -10,6 +10,7 @@ $(document).ready(function () {
 });
 
 function createLobby(){
+
     let lobbyinfo ={
         lobbyID:$('#create-lobby-name').val(),
         lobbyPassword:$('#create-lobby-password').val()
@@ -27,8 +28,10 @@ function createLobby(){
 }
 
 function joinLobby(){
+    // Create random lobby id (may need to change if lobbyname is too long)
+    const uniqueID = uuidv4();
     let lobbyinfo ={
-        lobbyID:$('#join-lobby-name').val(),
+        lobbyID: uniqueID,
         lobbyPassword:$('#join-lobby-password').val()
     };
     let req = $.post('/joinLobby', lobbyinfo);
