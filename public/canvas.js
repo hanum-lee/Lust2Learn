@@ -306,7 +306,6 @@ window.addEventListener('load', function () {
         var w = canvaso.width;
         var h = canvaso.height;
         drawPencil(data.x0 * w, data.y0 * h, data.x1 * w, data.y1 * h, data.color, data.lineThickness);
-		console.log("test");
     }
     
     socket.on('drawing', onDrawingEvent);
