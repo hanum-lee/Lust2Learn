@@ -28,7 +28,8 @@
 	<br>
 	<a role="button" class="btn btn-danger" id="userSignup" href="#">Create an account!</a>
 	<br>
-	<p><a href="/lobby.html" id="guestSignin">Continue as guest</a></p>
+	<p><a href="/guestlobby.html" id="guestSignin">Continue as guest</a></p>
+	<p><a href="/indexghost.html" id="ghostSignin">Ghost mode</a></p>
 </div>
 
 <div id="signup">
@@ -46,17 +47,38 @@
 				<input type="password" class="form-control" id="checkPassword" placeholder="Retype password">
 		</div>
 	  <span id="dup-user-err" style="color: red; display: none;">Username already taken.</span>
-	  <button type="submit" id="userCreate" class="btn btn-danger">Sign Up</button>
+	  <span id="dup-user-err" style="color: #990D35; display: none;">Username already taken.</span>		
+	  <span id='password-err' style="margin-bottom: 1%; text-align: center; color: #990D35; display: none;">Make sure your passwords are the same!</span>
+		<button type="submit" id="userCreate" class="btn btn-danger">Sign Up</button>
+		<button style='width: 100%; margin-top: 3%;' type="button" class='btn btn-danger' id='signinback'>Back</button>
 	</form>
 </div>
 
 <script>
+
+	$('#signinPassword, #checkPassword').on('keyup', function () {
+		if ($('#signinPassword').val() !== $('#checkPassword').val()) {
+			$('#password-err').show();
+		} 
+		else {
+			$('#password-err').hide();
+		}
+	});
+
 	$(function() {
 		$("#userSignup").click(function(){
 			$("#user-check").hide();
 			$("#signup").show();
 		});
 	});
+
+	$(function() {
+		$("#signinback").click(function(){
+			$("#signup").hide();
+			$("#user-check").show();
+		});
+	});
+
 </script>
 <script src="login.js"></script>
 

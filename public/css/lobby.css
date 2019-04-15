@@ -3,12 +3,33 @@ body {
     background: #FFF8E8;
 }
 
+h1 {
+    color: #990D35;
+    text-align: center;
+    margin-bottom: 10%;
+}
+
 button {
     margin: 0 auto;
     width: 45%;
     margin-left: 3%;
     height: 150px;
 }
+
+#createback, #joinback {
+    width: 100%;
+    height: auto;
+    margin-left: 0;
+}
+
+ #lobbyback {
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+    height: auto;
+    margin-top: 5%;
+}
+
 
 input {
     margin-bottom: 3%;
@@ -17,10 +38,11 @@ input {
 .container {
     display: block;
     margin: 0 auto;
-    margin-top: 20%;
+    margin-top: 10%;
 }
 
 #createlobby, #joinlobby {
     display: block;
     margin: 0 auto;
+	text-align: center;
 }

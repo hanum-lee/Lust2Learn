@@ -20,9 +20,14 @@
   margin-right: 5px;
 }
 
+h2 {
+  display: inline;
+  color: white !important;
+}
+
 body{
   background: #990D35 !important;
-  font: 'Abel', sans-serif !important;
+  font-family: 'Abel', sans-serif !important;
 }
 
 #imageTemp { 
@@ -75,13 +80,44 @@ input {
 }
 
 @media only screen and (max-width: 1234px) {
+
+  canvas, #container, #imageView, #imageTemp{
+    max-width: 100% !important;
+    width: 1000px;
+    margin-right: 2px;
+    margin-left: 2px;
+  }
+
+   .sideMenu {
+    height: 740px !important;
+  }
+
   .container {
     width: 60% !important;
     display: block;
     margin-left: 20% !important;
-
   }
-  input {
+	input {
+    width: 40px;
+    padding: 0;
+    margin-bottom: 0 !important;
+    margin-left: 2% !important;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  canvas, #container, #imageView, #imageTemp{
+    max-width: 100% !important;
+    width: 500px;
+    margin-right: 2px;
+    margin-left: 2px;
+  }
+
+
+   .container {
+    display: none;  
+  }
+	input {
     width: 40px;
     padding: 0;
     margin-bottom: 0 !important;

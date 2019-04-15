@@ -35,6 +35,11 @@ $(document).ready(function () {
 		saveCanvas();
 	});
 
+	$("#logoutlobby").click(function(){
+		window.location.replace("/lobby.html");
+	});
+
+
 	$("#logout").click(function(){
 		window.location.replace("/login.html");
 		document.cookie = "id=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
