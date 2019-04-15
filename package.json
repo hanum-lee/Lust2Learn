@@ -8,6 +8,7 @@
     "whiteboard"
   ],
   "dependencies": {
+    "aws-sdk": "^2.437.0",
     "body-parser": "^1.18.3",
     "express": "4.9.x",
     "mysql": "^2.16.0",

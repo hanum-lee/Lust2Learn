@@ -1,6 +1,7 @@
+let id;
 $(document).ready(function () {
 
-	var id = getID();
+	id = getID();
 
 	var idCookie = getCookie("id");
 	var userCookie = getCookie("username");
@@ -18,7 +19,7 @@ $(document).ready(function () {
 	}
 
 	getCanvas(id);
-	getPrevCanvas();
+	//getPrevCanvas();
 
 	if(userCookie && userCookie !== ""){
 		$("#user").text(userCookie);
@@ -89,7 +90,7 @@ function saveCanvas(){
 
 	imageData = canvas.toDataURL();
 	console.log(imageData);
-	let req = $.post('/saveCanvas',{ imgdata:imageData});
+	let req = $.post('/saveCanvas',{ id: id,imgdata:imageData});
 	// req.then(function (data) {
 	// 	console.log(data);
 	// })
@@ -99,21 +100,31 @@ function saveCanvas(){
 
 function getCanvas(id){
 	let msg = {id: id};
-	let req = $.post('/getCanvas',msg);
+	let req = $.post('/loadCanvas',msg);
+	let canvas = document.getElementById('imageView');
+	let context = canvas.getContext('2d');
+	let img = new Image();
 
 	req.then(function(data){
 
-		if(!data[0].path || data[0].path === ""){
-			$("#clear-all").click();
-		}
-		else{
-			var img = new Image();
-			img.onload = function() {
-				var ctx = document.getElementById('imageView').getContext('2d');
-				ctx.drawImage(img, 0, 0);
-			}
-			img.src = "."+data[0].path;
-		}
+		img.onload = function(){
+			context.drawImage(img,0,0);
+		};
+		console.log(data);
+		img.src = data;
+
+		// if(!data[0].path || data[0].path === ""){
+		// 	$("#clear-all").click();
+		// }
+		// else{
+		// 	// var img = new Image();
+		// 	// img.onload = function() {
+		// 	// 	var ctx = document.getElementById('imageView').getContext('2d');
+		// 	// 	ctx.drawImage(img, 0, 0);
+		// 	// }
+		// 	// img.src = "."+data[0].path;
+		//
+		// }
 
 	});
     req.fail(function () {

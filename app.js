@@ -8,10 +8,24 @@ const uuidv4 = require('uuid/v4');
 var mysql = require('mysql');
 var bodyParser = require('body-parser');
 let fs = require('fs');
+let AWS = require('aws-sdk');
+AWS.config.update({region:'us-west-1'});
+let s3 = new AWS.S3({
+	apiVersion:"2008-10-17"
+});
+
 
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+let con = mysql.createConnection({
+	host     : 'dbinsttest.cuck6xs9w3gi.us-east-1.rds.amazonaws.com',
+	user     : 'root',
+	password : '12345678',
+	port     : '3306',
+	database : 'testing'
+});
 
 /*----
 ROUTES
@@ -23,49 +37,55 @@ app.get("/", function(req, res){
 
 // Account login
 app.post('/login',function (req, res) {
-	var con = mysql.createConnection({
-		host: 'localhost',
-		user: 'root',
-		password: 'tablefordays471',
-		database: 'mysql'
+	// var con = mysql.createConnection({
+	// 	host: 'localhost',
+	// 	user: 'root',
+	// 	password: 'tablefordays471',
+	// 	database: 'mysql'
+	// });
+	let sql = "SELECT * FROM user_info WHERE username = ? AND password = ?";
+	let username = req.body.userID;
+	let password = req.body.userPassword;
+	con.query(sql, [username, password], function (err, result) {
+		if (err) throw err;
+		else res.send(result);
 	});
 
-	con.connect(function(err) {
-		if (err) throw err;
-		let sql = "SELECT * FROM user_info WHERE username = ? AND password = ?";
-		let username = req.body.userID;
-		let password = req.body.userPassword;
-		con.query(sql, [username, password], function (err, result) {
-			if (err) throw err;
-			else res.send(result);
-		});
-	});
+	// con.connect(function(err) {
+	// 	if (err) throw err;
+	//
+	//
+	// });
+
 });
 
 // Creating new account
 app.post('/createUser',function(req,res){
-	var con = mysql.createConnection({
-		host: 'localhost',
-		user: 'root',
-		password: 'tablefordays471',
-		database: 'mysql'
-	});
+	// var con = mysql.createConnection({
+	// 	host: 'localhost',
+	// 	user: 'root',
+	// 	password: 'tablefordays471',
+	// 	database: 'mysql'
+	// });
 
-	con.connect(function(err) {
-		let sql = "INSERT INTO user_info (id, email, username, password) VALUES (?,?,?,?)";
-		const uniqueID = uuidv4();
-		let email = req.body.userEmail;
-		let username = req.body.userID;
-		let password = req.body.userPassword;
-		con.query(sql, [uniqueID, email, username, password], function (err, result) {
-			if (err){
-				if(err.code == 'ER_DUP_ENTRY' || err.errno == 1062){
-					res.send("Duplicate entry");
-				}
+	let sql = "INSERT INTO user_info (id, email, username, password) VALUES (?,?,?,?)";
+	const uniqueID = uuidv4();
+	let email = req.body.userEmail;
+	let username = req.body.userID;
+	let password = req.body.userPassword;
+	con.query(sql, [uniqueID, email, username, password], function (err, result) {
+		if (err){
+			if(err.code == 'ER_DUP_ENTRY' || err.errno == 1062){
+				res.send("Duplicate entry");
 			}
-			else res.send(result);
-		});
+		}
+		else res.send(result);
 	});
+	// con.connect(function(err) {
+	//
+	//
+	// });
+
 });
 
 // Generate lobby ID
@@ -78,148 +98,199 @@ app.get('/createID', function(req, res) {
 
  // Create new lobby
 app.post('/createLobby', function(req, res) {
-	var con = mysql.createConnection({
-		host: 'localhost',
-		user: 'root',
-		password: 'tablefordays471',
-		database: 'mysql'
+	// var con = mysql.createConnection({
+	// 	host: 'localhost',
+	// 	user: 'root',
+	// 	password: 'tablefordays471',
+	// 	database: 'mysql'
+	// });
+
+	let sql = "INSERT INTO lobbies (id, Password) VALUES (?,?)";
+	let name = req.body.lobbyID;
+	let password = req.body.lobbyPassword;
+	con.query(sql, [name, password], function (err, result) {
+		if (err) {
+			if(err.code == 'ER_DUP_ENTRY' || err.errno == 1062) {
+				res.send("Duplicate entry");
+			}
+		}
+		else res.send(result);
 	});
 
- 	con.connect(function(err) {
-		if (err) throw err;
-		let sql = "INSERT INTO lobbies (id, Password) VALUES (?,?)";
-		let name = req.body.lobbyID;
-		let password = req.body.lobbyPassword;
-		con.query(sql, [name, password], function (err, result) {
-			if (err) {
-					if(err.code == 'ER_DUP_ENTRY' || err.errno == 1062) {
-							res.send("Duplicate entry");
-					}
-			}
-			else res.send(result);
-		});
-	});
+ 	// con.connect(function(err) {
+	//	if (err) throw err;
+	//
+	// });
+
 });
 
  // Join lobby
 app.post('/joinLobby', function(req, res) {
-	var con = mysql.createConnection({
-		host: 'localhost',
-		user: 'root',
-		password: 'tablefordays471',
-		database: 'mysql'
-	});
+	// var con = mysql.createConnection({
+	// 	host: 'localhost',
+	// 	user: 'root',
+	// 	password: 'tablefordays471',
+	// 	database: 'mysql'
+	// });
 
- 	con.connect(function(err) {
-		if (err) throw err;
-		let sql = "SELECT * FROM lobbies WHERE id = ? AND Password = ?";
-		let name = req.body.lobbyID;
-		let password = req.body.lobbyPassword;
-		con.query(sql, [name, password], function (err, result) {
-			if (err) {
-				throw err;
-			}
-			res.send(result);
-		});
+
+	let sql = "SELECT * FROM lobbies WHERE id = ? AND Password = ?";
+	let name = req.body.lobbyID;
+	let password = req.body.lobbyPassword;
+	con.query(sql, [name, password], function (err, result) {
+		if (err) {
+			throw err;
+		}
+		res.send(result);
 	});
+ 	// con.connect(function(err) {
+	//	if (err) throw err;
+	//
+	// });
+
 });
 
  // Change username
 app.post('/updateUsername',function (req, res) {
-	var con = mysql.createConnection({
-		host: 'localhost',
-		user: 'root',
-		password: 'tablefordays471',
-		database: 'mysql'
+	// var con = mysql.createConnection({
+	// 	host: 'localhost',
+	// 	user: 'root',
+	// 	password: 'tablefordays471',
+	// 	database: 'mysql'
+	// });
+
+	let sql = "UPDATE user_info SET username = ? WHERE id = ? AND password = ?";
+	let newUsername = req.body.username;
+	let id = req.body.id;
+	let password = req.body.userPassword;
+	con.query(sql, [newUsername, id, password], function (err, result) {
+		if (err) {
+			if(err.code == 'ER_DUP_ENTRY' || err.errno == 1062){
+				res.send("Duplicate entry");
+			}
+		}
+		else res.send(result);
 	});
 
-	con.connect(function(err) {
-		if (err) throw err;
-		let sql = "UPDATE user_info SET username = ? WHERE id = ? AND password = ?";
-		let newUsername = req.body.username;
-		let id = req.body.id;
-		let password = req.body.userPassword;
-		con.query(sql, [newUsername, id, password], function (err, result) {
-			if (err) {
-				if(err.code == 'ER_DUP_ENTRY' || err.errno == 1062){
-					res.send("Duplicate entry");
-				}
-			}
-			else res.send(result);
-		});
-	});
+	// con.connect(function(err) {
+	//	if (err) throw err;
+	//
+	// });
+
 });
 
 // Update password
 app.post('/updatePassword',function (req, res) {
-	var con = mysql.createConnection({
-		host: 'localhost',
-		user: 'root',
-		password: 'tablefordays471',
-		database: 'mysql'
+	// var con = mysql.createConnection({
+	// 	host: 'localhost',
+	// 	user: 'root',
+	// 	password: 'tablefordays471',
+	// 	database: 'mysql'
+	// });
+	let sql = "UPDATE user_info SET password = ? WHERE id = ? AND password = ?";
+	let oldPassword = req.body.oldPass;
+	let newPassword = req.body.newPass;
+	let id = req.body.id;
+	con.query(sql, [newPassword, id, oldPassword], function (err, result) {
+		if (err) {
+			if(err.code == 'ER_DUP_ENTRY' || err.errno == 1062){
+				res.send("Duplicate entry");
+			}
+		}
+		else res.send(result);
 	});
 
-	con.connect(function(err) {
-		if (err) throw err;
-		let sql = "UPDATE user_info SET password = ? WHERE id = ? AND password = ?";
-		let oldPassword = req.body.oldPass;
-		let newPassword = req.body.newPass;
-		let id = req.body.id;
-		con.query(sql, [newPassword, id, oldPassword], function (err, result) {
-			if (err) {
-				if(err.code == 'ER_DUP_ENTRY' || err.errno == 1062){
-					res.send("Duplicate entry");
-				}
-			}
-			else res.send(result);
-		});
-	});
+	// con.connect(function(err) {
+	// 	if (err) throw err;
+	//
+	//
+	// });
+
+
 });
+
 
 //Load saved canvas
 app.post('/getCanvas',function (req, res) {
-	var con = mysql.createConnection({
-		host: 'localhost',
-		user: 'root',
-		password: 'tablefordays471',
-		database: 'mysql'
-	});
+	// var con = mysql.createConnection({
+	// 	host: 'localhost',
+	// 	user: 'root',
+	// 	password: 'tablefordays471',
+	// 	database: 'mysql'
+	// });
 
-	con.connect(function(err) {
+
+
+	let sql = "SELECT * FROM canvas_list WHERE id = ?";
+	let id = req.body.id;
+	con.query(sql, id, function (err, result) {
 		if (err) throw err;
-		let sql = "SELECT * FROM canvas_list WHERE id = ?";
-		let id = req.body.id;
-		con.query(sql, id, function (err, result) {
-			if (err) throw err;
-			else res.send(result);
-		});
+		else res.send(result);
 	});
+	// con.connect(function(err) {
+	// 	if (err) throw err;
+	//
+	//
+	// });
+
 });
 
 app.post('/saveCanvas',function (req,res) {
   console.log('Test');
-  console.log(req.body);
+  //console.log(req.body);
   let testbody = req.body.imgdata;
   console.log(testbody);
+	let uploadParam = {
+		Bucket: 'elasticbeanstalk-us-west-1-438843833043',
+		ContentType:'image/jpeg',
+		ContentEncoding:'base64'
+	};
+  let filename = 'jpgfile/' +req.body.id + '.jpg';
+  //console.log(filename);
   let base64Data = testbody.replace(/^data:image\/png;base64,/, "");
-  fs.writeFile('test1.jpg',base64Data,'base64',function(err){
-    if(err){
-      console.log(err);
-    }
-  })
+  console.log("base64dat",base64Data);
+  uploadParam.Key = filename;
+  //uploadParam.Body = base64Data;
+  let buf = new Buffer(base64Data,'base64');
+  uploadParam.Body = buf;
+  s3.upload(uploadParam,function (err,data) {
+        if(err){
+            console.log(err);
+        }
+        if(data){
+            console.log(data.Location);
+        }
+    });
+
+  // fs.writeFile('test1.jpg',base64Data,'base64',function(err){
+  //   if(err){
+  //     console.log(err);
+  //   }
+  // })
 });
 
-app.get('/canvas',function (req,res) {
-  fs.readFile('test1.jpg','base64',function (err,data) {
-    if(err){
-      console.log(err);
-    }
-    if(data){
-      console.log("ReadingData");
-      console.log(data);
-      res.send('data:image\\/png;base64,' + data);
-    }
-  })
+app.post('/loadCanvas',function (req,res) {
+
+	let id = req.body.id;
+	console.log("loading",req.body.id);
+	let filepath = 'jpgfile/' + req.body.id + '.jpg';
+	console.log(filepath);
+	let downloadParam = {
+     Bucket:'elasticbeanstalk-us-west-1-438843833043',
+     Key: filepath
+	};
+	//downloadParam.Key = filepath;
+
+	s3.getObject(downloadParam,function (err, data) {
+		if(err){
+			console.log(err)
+		}
+		if(data){
+			console.log(data.Body);
+			let sendingdata = 'data:image\\/png;base64,' + data.Body.toString('base64');
+			res.send(sendingdata);
+		}
+	});
 
 });
 
