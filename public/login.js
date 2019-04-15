@@ -9,6 +9,10 @@ $(document).ready(function () {
         document.cookie = "id=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
 		document.cookie = "username=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
     });
+	$('#ghostSignin').click(function(){
+        document.cookie = "id=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+		document.cookie = "username=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    });
 });
 
 
