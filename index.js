@@ -25,6 +25,20 @@ app.post('/saveCanvas',function (req,res) {
   })
 });
 
+app.get('/canvas',function (req,res) {
+  fs.readFile('test1.jpg','base64',function (err,data) {
+    if(err){
+      console.log(err);
+    }
+    if(data){
+      console.log("ReadingData");
+      console.log(data);
+      res.send('data:image\\/png;base64,' + data);
+    }
+  })
+
+});
+
 function onConnection(socket){
   socket.on('drawing', function(data){
     socket.broadcast.emit('drawing', data);

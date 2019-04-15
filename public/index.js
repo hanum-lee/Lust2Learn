@@ -19,6 +19,7 @@ $(document).ready(function () {
 	}
 
 	getCanvas(id);
+	getPrevCanvas();
 
 	if(userCookie && userCookie !== ""){
 		$("#user").text(userCookie);
@@ -162,3 +163,19 @@ function getCookie(field) {
 	}
 	return "";
 }
+
+function getPrevCanvas () {
+    let canvas = document.getElementById('imageView');
+    let context = canvas.getContext('2d');
+    let img = new Image();
+
+    let req = $.get('/canvas');
+    req.then(function (data) {
+        img.onload = function(){
+            context.drawImage(img,0,0);
+        };
+        img.src = data;
+        console.log(data);
+    });
+}
+
