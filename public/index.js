@@ -13,8 +13,7 @@ $(document).ready(function () {
 
 	}
 	else{
-		//$("#save").hide();
-		$("#logout").hide();
+		$("#save").hide();
 		$("#sidemenuBtn").css('visibility','hidden');
 	}
 
@@ -42,9 +41,13 @@ $(document).ready(function () {
 	});
 
 	$("#logoutlobby").click(function(){
-		window.location.replace("/lobby.html");
+		if(userCookie && userCookie !== ""){
+			window.location.replace("/lobby.html");
+		}
+		else{
+			window.location.replace("/login.html");
+		}
 	});
-
 
 	$("#logout").click(function(){
 		window.location.replace("/login.html");
