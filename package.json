@@ -1,16 +1,23 @@
 {
-  "name": "nodeapp",
-  "version": "0.0.0",
-  "private": true,
-  "scripts": {
-    "start": "node ./bin/www",
-    "devstart": "nodemon ./bin/www"
-  },
+  "name": "whiteboard",
+  "version": "1.0.0",
+  "description": "A collaborative whiteboard using socket.io",
+  "main": "index.js",
+  "keywords": [
+    "socket.io",
+    "whiteboard"
+  ],
   "dependencies": {
-    "cookie-parser": "~1.4.3",
-    "debug": "~2.6.9",
-    "express": "~4.16.0",
-    "morgan": "~1.9.0",
-    "nodemon": "^1.18.10"
-  }
+    "aws-sdk": "^2.437.0",
+    "body-parser": "^1.18.3",
+    "express": "4.9.x",
+    "mysql": "^2.16.0",
+    "socket.io": "latest",
+    "uuid": "^3.3.2"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Devan",
+  "license": "MIT"
 }

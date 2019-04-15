@@ -1,0 +1,25 @@
+<html>
+
+<head>
+  <title>Express</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="/stylesheets/main.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+</head>
+
+<body>
+<div class="controls">
+  <label for="nmbr">Brush Size</label>
+  <input type="image" src='img/pencil.png' class='tools'>
+  <input type="image" src="img/eraser.png" class='tools'>
+  <input type="number" id="brushSize" class="nmbr" value="10" placeholder="25">
+  </br>
+  <label for="brushColor">Colour</label>
+  <input type="color" id="brushColor">
+  <button onclick="saveState()">Save</button>
+</div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.2/p5.js'></script>
+   <script src="js/index.js"></script>
+</body>
+
+</html>

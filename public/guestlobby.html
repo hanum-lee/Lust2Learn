@@ -1,0 +1,25 @@
+<html>
+
+<head>
+  <title>ilLUSTrate</title>
+	<meta charset="utf-8">
+	<link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">  <link rel="stylesheet" href="/stylesheets/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/lobby.css">
+</head>
+
+    <body>
+        <div id='joinlobby'  style='width: 40%;'>
+            <h1 style="margin-top: 20%;">Welcome to IlLUSTrate, join a lobby to start the fun ;)</h1>
+            <input class='form-control' type="text" id="join-lobby-name" placeholder="Lobby ID">
+            <input class='form-control' type="password" id="join-lobby-password" placeholder="Lobby password">
+            <span id="no-lobby-err" style="color: red; display: none;">Incorrect Password or lobby doesn't exist.</span>
+            <button style="width: 100%; margin-bottom: 5%; height:auto; margin-left: 0;" type="button" class="btn btn-danger" id="join-lobby">Join Lobby!!</button>
+            <button style='width: 100%;' type="button" class='btn btn-danger' onclick="window.location.href='login.html'" id='lobbyback'>Go to login</button>
+        </div>
+    </body>
+
+	<script src="lobby.js"></script>
+</html>

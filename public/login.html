@@ -1,0 +1,83 @@
+<html>
+
+<head>
+  <title>ilLUSTrate</title>
+	<meta charset="utf-8">
+	<link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">  <link rel="stylesheet" href="/stylesheets/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+<img src="/img/ilLUSTrate_logo.png" id="logo">
+<div id="user-check">
+	<form>
+		<div id='user-login'>
+			<input id="loginUsername" type="text" placeholder="Username"> <br>
+			<input id="loginPassword" type="password" placeholder="Password"> <br>
+			<span id="no-user-err" style="color: red; display: none;">No matching username and password found.</span>
+			<button type="button" class="btn btn-danger" id="userSignin">Sign In</button>
+		</div>
+	</form>
+	<br>
+	<a role="button" class="btn btn-danger" id="userSignup" href="#">Create an account!</a>
+	<br>
+	<p><a href="/guestlobby.html" id="guestSignin">Continue as guest</a></p>
+	<p><a href="/indexghost.html" id="ghostSignin">Ghost mode</a></p>
+</div>
+
+<div id="signup">
+	<form>
+		<div class="form-group">
+			<input type="email" class="form-control" id="userEmail" placeholder="Email">
+		</div>
+	  <div class="form-group">
+		<input type="text" class="form-control" id="signupUsername" placeholder="Enter username">
+	  </div>
+	  <div class="form-group">
+		<input type="password" class="form-control" id="signupPassword" placeholder="Enter password">
+		</div>
+		<div class="form-group">
+				<input type="password" class="form-control" id="checkPassword" placeholder="Retype password">
+		</div>
+	  <span id="dup-user-err" style="color: red; display: none;">Username already taken.</span>
+	  <span id="dup-user-err" style="color: #990D35; display: none;">Username already taken.</span>		
+	  <span id='password-err' style="margin-bottom: 1%; text-align: center; color: #990D35; display: none;">Make sure your passwords are the same!</span>
+		<button type="submit" id="userCreate" class="btn btn-danger">Sign Up</button>
+		<button style='width: 100%; margin-top: 3%;' type="button" class='btn btn-danger' id='signinback'>Back</button>
+	</form>
+</div>
+
+<script>
+
+	$('#signinPassword, #checkPassword').on('keyup', function () {
+		if ($('#signinPassword').val() !== $('#checkPassword').val()) {
+			$('#password-err').show();
+		} 
+		else {
+			$('#password-err').hide();
+		}
+	});
+
+	$(function() {
+		$("#userSignup").click(function(){
+			$("#user-check").hide();
+			$("#signup").show();
+		});
+	});
+
+	$(function() {
+		$("#signinback").click(function(){
+			$("#signup").hide();
+			$("#user-check").show();
+		});
+	});
+
+</script>
+<script src="login.js"></script>
+
+</body>
+
+</html>

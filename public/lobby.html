@@ -1,0 +1,79 @@
+<html>
+
+<head>
+  <title>ilLUSTrate</title>
+	<meta charset="utf-8">
+	<link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">  <link rel="stylesheet" href="/stylesheets/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/lobby.css">
+</head>
+
+    <body>
+        <div class="container">
+			<h1>Welcome to IlLUSTrate, create or join a lobby to start the fun ;)</h1>
+            <button type="button" class="btn btn-danger" id='create'>Create a new lobby</button>
+            <button type="button" class="btn btn-danger" id='join'>Enter existing lobby</button>
+			<button type="button" class='btn btn-danger' onclick="window.location.href='login.html'" id='lobbyback'>Go to login</button>
+        </div>  
+
+        <div id='createlobby' style='display: none; width: 40%;'>
+            <p>your lobby id is:</p>            
+			<h3 id='lobbyID'></h3>
+            <p>Share this with friends!</p>
+
+            <input class='form-control' type="password" id="create-lobby-password" placeholder="Lobby password">
+            <button style="width: 100%; margin-bottom: 5%; height:auto; margin-left: 0;" type="button" class="btn btn-danger" id="create-lobby">Create Lobby!!</button>
+			<button class='btn btn-danger' id='createback'>Go back</button>
+        </div>
+
+        <div id='joinlobby'  style='display: none; width: 40%;'>
+            <input class='form-control' type="text" id="join-lobby-name" placeholder="Lobby ID">            
+			<input class='form-control' type="password" id="join-lobby-password" placeholder="Lobby password">
+            <span id="no-lobby-err" style="color: red; display: none;">Incorrect password or lobby doesn't exist.</span>
+            <button style="width: 100%; margin-bottom: 5%; height:auto; margin-left: 0;" type="button" class="btn btn-danger" id="join-lobby">Join Lobby!!</button>
+			<button class='btn btn-danger' id='joinback'>Go back</button>
+        </div>
+    </body>
+
+    <script>
+        $(function() {
+            $("#create").click(function(){
+                $("#join").hide();
+                $("#create").hide();
+                $("#createlobby").show();
+				$("#lobbyback").hide();
+            });
+        });
+
+        $(function() {
+            $("#join").click(function(){
+                $("#join").hide();
+                $("#create").hide();
+                $("#joinlobby").show();
+				$("#lobbyback").hide();
+            });
+        });
+         $(function() {
+            $("#createback").click(function(){
+                $("#join").show();
+                $("#create").show();
+                $("#joinlobby").hide();
+                $("#createlobby").hide();
+                $("#lobbyback").show();
+            });
+        });
+         $(function() {
+            $("#joinback").click(function(){
+                $("#join").show();
+                $("#create").show();
+                $("#joinlobby").hide();
+                $("#createlobby").hide();
+                $("#lobbyback").show();
+            });
+        });
+    </script>
+	<script src="lobby.js"></script>
+
+</html>
