@@ -4,8 +4,26 @@ const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 const port = process.env.PORT || 3000;
+let bodyParser = require('body-parser');
+let fs = require('fs');
+
+app.use(bodyParser.urlencoded({ extended: true, limit:'50mb' }));
+app.use(bodyParser.json({limit:'50mb',extended: true}));
 
 app.use(express.static(__dirname + '/public'));
+
+app.post('/saveCanvas',function (req,res) {
+  console.log('Test');
+  console.log(req.body);
+  let testbody = req.body.imgdata;
+  console.log(testbody);
+  let base64Data = testbody.replace(/^data:image\/png;base64,/, "");
+  fs.writeFile('test1.jpg',base64Data,'base64',function(err){
+    if(err){
+      console.log(err);
+    }
+  })
+});
 
 function onConnection(socket){
   socket.on('drawing', function(data){

@@ -13,7 +13,7 @@ $(document).ready(function () {
 
 	}
 	else{
-		$("#save").hide();
+		//$("#save").hide();
 		$("#logout").hide();
 		$("#sidemenuBtn").css('visibility','hidden');
 	}
@@ -61,16 +61,25 @@ function displayRoomID(id){
 }
 
 function saveCanvas(){
-	var canvas = document.getElementById('imageView');
-    var context = canvas.getContext('2d');
+	 let canvas = document.getElementById('imageView');
+     let context = canvas.getContext('2d');
+	//
+    // var dataURL = canvas.toDataURL("image/jpeg");
+	//
+	// var a = document.createElement('a');
+    // a.href = dataURL;
+    // a.download = getID()+".jpg";
+    // document.body.appendChild(a);
+    // a.click();
+	//let imageData = context.getImageData(0,0,canvas.width/50,canvas.height/50);
 
-    var dataURL = canvas.toDataURL("image/jpeg");
+	imageData = canvas.toDataURL();
+	console.log(imageData);
+	let req = $.post('/saveCanvas',{ imgdata:imageData});
+	// req.then(function (data) {
+	// 	console.log(data);
+	// })
 
-	var a = document.createElement('a');
-    a.href = dataURL;
-    a.download = getID()+".jpg";
-    document.body.appendChild(a);
-    a.click();
 
 }
 
