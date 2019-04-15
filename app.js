@@ -7,6 +7,7 @@ const port = process.env.PORT || 3000;
 const uuidv4 = require('uuid/v4');
 var mysql = require('mysql');
 var bodyParser = require('body-parser');
+let fs = require('fs');
 
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -193,6 +194,33 @@ app.post('/getCanvas',function (req, res) {
 			else res.send(result);
 		});
 	});
+});
+
+app.post('/saveCanvas',function (req,res) {
+  console.log('Test');
+  console.log(req.body);
+  let testbody = req.body.imgdata;
+  console.log(testbody);
+  let base64Data = testbody.replace(/^data:image\/png;base64,/, "");
+  fs.writeFile('test1.jpg',base64Data,'base64',function(err){
+    if(err){
+      console.log(err);
+    }
+  })
+});
+
+app.get('/canvas',function (req,res) {
+  fs.readFile('test1.jpg','base64',function (err,data) {
+    if(err){
+      console.log(err);
+    }
+    if(data){
+      console.log("ReadingData");
+      console.log(data);
+      res.send('data:image\\/png;base64,' + data);
+    }
+  })
+
 });
 
 function onConnection(socket){

@@ -32,6 +32,11 @@ $(document).ready(function () {
 		displayRoomID(id);
 	});
 
+	$("#clear-all").click(function(){
+		alert("Are you sure you want to clear? (This will clear the canvas for all current users)")
+	});
+
+
 	$("#save").click(function(){
 		saveCanvas();
 	});
@@ -146,7 +151,9 @@ function passwordChange(){
 		if(data.affectedRows < 1){
 			$("#pass-change-err").show();
 		}
-		alert("Password change successful!");
+		else{
+			alert("Password change successful!");
+		}
     });
     req.fail(function () {
         console.log("failed");

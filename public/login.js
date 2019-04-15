@@ -45,6 +45,9 @@ function createUser(){
         if(data === "Duplicate entry"){
 			$("#dup-user-err").show();
 		}
+		else{
+			alert("Registration successful!")
+		}
     });
     req.fail(function () {
         console.log("failed");

@@ -26,20 +26,18 @@
 			<span id="user-change-err" style="color: red; display: none;">Username change unsuccessful.</span>
             <button style="width: 100%; margin-bottom: 5%;" type="button" class="btn btn-danger" id="change-username">Submit</button>
           </li>
-		  <li>
-            <button style='width: 100%; margin-top: 20%;' class='form-control btn btn-danger' id='logout'>Logout</button>
-          </li>
         </form>
         <form id='password-change'>
           <label>Change your password</label>
           <li>
-              <input id="oldPassword" class='form-control' type="text" placeholder="Current password">
+              <input id="oldPassword" class='form-control' type="password" placeholder="Current password">
               <input id="newPassword" class='form-control' type="password" placeholder="New password">
               <input class='form-control' type="password" placeholder="Retype new password">
 			  <span id="pass-change-err" style="color: red; display: none;">Password change unsuccessful.</span>
               <button style="width: 100%;" type="button" class="btn btn-danger" id="change-password">Submit</button>
-          </li>
+          </li>     
         </form>
+		<button style='width: 100%; margin-top: 20%;' class='form-control btn btn-danger' id="logout">Logout</button>
       </ul>
     </aside>
 
