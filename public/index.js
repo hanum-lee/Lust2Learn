@@ -9,7 +9,7 @@ $(document).ready(function () {
 	if(idCookie && idCookie !== ""){
 
 		if(!id || id === ""){
-			window.location.replace("/?id="+idCookie);
+			window.location.replace("/lobby.html");
 		}
 
 	}
