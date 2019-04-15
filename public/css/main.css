@@ -86,12 +86,18 @@ input {
   #container {
     margin-right: 10% !important;
   }
-  .form-group {
-    width: 70px !important;
-  }
   #banner {
     margin-left: 8%;
     margin-right: 8%;
+  }
+}
+
+@media only screen and (max-width: 1530px) {
+  .container {
+    margin-left: 0 !important;
+  }
+  #container {
+    margin-right: 5px !important;
   }
 }
 
